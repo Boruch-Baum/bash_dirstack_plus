@@ -1,9 +1,10 @@
-bash_dirstack_plus README.org  -*- mode: org; mode:visual-line; -*-
-#+TITLE: bash_dirstack_plus README.org
-* bash_dirstack_plus - friendly, persistent 'cd' stack
+* bash_dirstack_plus
+A friendly, persistent 'cd' stack for the bash shell
 
 Repository: https://github.com/Boruch-Baum/bash_dirstack_plus
+
 Author:     Boruch Baum <boruch_baum@gmx.com>
+
 License:    GPL3+
 
 ** Synopsis:
@@ -11,17 +12,17 @@ License:    GPL3+
 #+BEGIN_SRC sh
   dirs
 
-  [pushd|pu] [= ] path/to/dir
-             n
-             [= ] substring
+  pushd|pu [= ] path/to/dir
+           n
+           [= ] substring
 
-  [popd|po] n ...
+  popd|po n ...
 #+END_SRC
 
 ** Description:
 
   This file offers three wrapper functions for bash builtin commands
-  `dirs', `pushd', and `popd', in order to make them easier to use,
+  `dirs`, `pushd`, and `popd`, in order to make them easier to use,
   and in order to extend their features to include persistence
   across sessions, removal of duplicate entries, substring
   searching, and multiple stacks.
@@ -29,7 +30,7 @@ License:    GPL3+
 
 ** Installation:
 
-  From either the command line, or from file .bashrc:
+  From either the command line, or from file `.bashrc`:
 
 #+BEGIN_SRC sh
     source path/to/this/file
@@ -46,8 +47,8 @@ License:    GPL3+
 ** Discussion:
 
   Bash automatically keeps track of a session's prior directory, so
-  that one can easily refer to it ($OLD_PWD) or navigate back to it
-  (`cd -'). Additionally, bash offers tools to allow the user to
+  that one can easily refer to it (`$OLD_PWD`) or navigate back to it
+  (`cd -`). Additionally, bash offers tools to allow the user to
   manually store and refer to a list of directories, which bash
   calls its DIRSTACK. Bash offers a `dirs' command to view the
   stack, and commands `pushd' and `popd' to maninpulate it and to
@@ -80,7 +81,7 @@ License:    GPL3+
     In the first form, a directory is added to the stack. In the
     event that the directory is a number, which could be
     mis-interpreted as a request to navigate to a current entry on
-    the stack, precede the directoy path with `= '.
+    the stack, precede the directoy path with `= `.
 
     In the second form, navigate to stack element N.
 
@@ -88,7 +89,7 @@ License:    GPL3+
     contains the substring SUBSTRING. If the substring is a
     number, which could be mis-interpreted as a request to navigate
     to a current entry on the stack, precede the directoy path with
-    `= '.
+    `= `.
 
 ***  popd (aliased to po)
 
@@ -104,7 +105,7 @@ License:    GPL3+
 
 ***  DIRSTACK_HISTFILE
 
-    Default value:  ${HOME}/.cache/bash_dirstack_history
+    Default value:  `${HOME}/.cache/bash_dirstack_history`
 
     The name of a file which stores the persistent copy of the bash
     directory stack, shared among all of the user's concurrent
@@ -124,4 +125,6 @@ License:    GPL3+
     When set, pushd does not diplay the elements of the stack.
 
 
-** ©2018 Boruch Baum <boruch_baum@gmx.com>
+** Copyright and license
+
+©2018 Boruch Baum <boruch_baum@gmx.com>, license: GPL3+
