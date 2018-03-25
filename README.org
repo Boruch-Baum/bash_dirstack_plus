@@ -86,7 +86,7 @@ License:    GPL3+
     In the second form, navigate to stack element N.
 
     In the third form, navigate to the first stack element that
-    contains the substring SUBSTRING. If the substring is a
+    contains the substring =SUBSTRING=. If the substring is a
     number, which could be mis-interpreted as a request to navigate
     to a current entry on the stack, precede the directoy path with
     `= `.
@@ -122,7 +122,7 @@ License:    GPL3+
 
 ***  PUSHD_SILENT
 
-    When set, pushd does not diplay the elements of the stack.
+    When set, =pushd= does not diplay the elements of the stack.
 
 
 ** Copyright and license
