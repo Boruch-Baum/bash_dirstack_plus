@@ -1,5 +1,5 @@
 * bash_dirstack_plus
-A friendly, persistent 'cd' stack for the bash shell
+A friendly, persistent =cd= stack for the bash shell
 
 Repository: https://github.com/Boruch-Baum/bash_dirstack_plus
 
