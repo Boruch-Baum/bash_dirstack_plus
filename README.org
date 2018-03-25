@@ -1,0 +1,127 @@
+bash_dirstack_plus README.org  -*- mode: org; mode:visual-line; -*-
+#+TITLE: bash_dirstack_plus README.org
+* bash_dirstack_plus - friendly, persistent 'cd' stack
+
+Repository: https://github.com/Boruch-Baum/bash_dirstack_plus
+Author:     Boruch Baum <boruch_baum@gmx.com>
+License:    GPL3+
+
+** Synopsis:
+
+#+BEGIN_SRC sh
+  dirs
+
+  [pushd|pu] [= ] path/to/dir
+             n
+             [= ] substring
+
+  [popd|po] n ...
+#+END_SRC
+
+** Description:
+
+  This file offers three wrapper functions for bash builtin commands
+  `dirs', `pushd', and `popd', in order to make them easier to use,
+  and in order to extend their features to include persistence
+  across sessions, removal of duplicate entries, substring
+  searching, and multiple stacks.
+
+
+** Installation:
+
+  From either the command line, or from file .bashrc:
+
+#+BEGIN_SRC sh
+    source path/to/this/file
+#+END_SRC
+
+** Uninstallation:
+
+#+BEGIN_SRC sh
+    unalias dirs pushd pu popd pu
+    unset -f dirs_wrapper_function pushd_wrapper_function popd_wrapper_function
+    unset -f __load_dir_stack_history __update_dir_stack_history
+#+END_SRC
+
+** Discussion:
+
+  Bash automatically keeps track of a session's prior directory, so
+  that one can easily refer to it ($OLD_PWD) or navigate back to it
+  (`cd -'). Additionally, bash offers tools to allow the user to
+  manually store and refer to a list of directories, which bash
+  calls its DIRSTACK. Bash offers a `dirs' command to view the
+  stack, and commands `pushd' and `popd' to maninpulate it and to
+  navigate to its elements. Though these features sound very useful
+  to any user of the command-line, this writer observed and
+  experienced that these features are rarely used, and attributes
+  that to how the commands were implemented (if you haven't yet, try
+  using them). The wrapper functions of this file aim to fix that.
+
+
+***  dirs
+
+    Displays entries of the stack in a vertical list, with the stack
+    entry number alongside each entry. Unlike the native builin, the
+    current directory information is not presented as item zero.
+
+***  pushd (aliased to pu)
+
+#+BEGIN_SRC sh
+    [pushd|pu] [= ] path/to/dir
+               n
+               [= ] substring
+#+END_SRC
+
+    Performs a change directory operation, either to a directory
+    already on the stack, or to a new directory which is added to
+    the stack if it is not already there. This command also displays
+    the stack, unless environment variable PUSHD_SILENT is set.
+
+    In the first form, a directory is added to the stack. In the
+    event that the directory is a number, which could be
+    mis-interpreted as a request to navigate to a current entry on
+    the stack, precede the directoy path with `= '.
+
+    In the second form, navigate to stack element N.
+
+    In the third form, navigate to the first stack element that
+    contains the substring SUBSTRING. If the substring is a
+    number, which could be mis-interpreted as a request to navigate
+    to a current entry on the stack, precede the directoy path with
+    `= '.
+
+***  popd (aliased to po)
+
+#+BEGIN_SRC sh
+    [popd|po] n ...
+#+END_SRC
+
+    Removes entries from directory stack. Accepts a space-delimited
+    list of numbers. Does NOT navigate directories.
+
+
+** Environment variables:
+
+***  DIRSTACK_HISTFILE
+
+    Default value:  ${HOME}/.cache/bash_dirstack_history
+
+    The name of a file which stores the persistent copy of the bash
+    directory stack, shared among all of the user's concurrent
+    terminal sessions. Thus, when one adds or removes an entry in
+    one terminal session, the modification to the stack is
+    immediately available to all of that user's other terminal
+    sessions. Duplicate entries are not kept.
+
+    Manipulating this variable and the underlying file to which it
+    refers allows the user to create and switch between multiple
+    directory stacks. Thus, a user with multiple independent bash
+    processes open can have several using some stack A while others
+    use some other stack B.
+
+***  PUSHD_SILENT
+
+    When set, pushd does not diplay the elements of the stack.
+
+
+** ©2018 Boruch Baum <boruch_baum@gmx.com>
