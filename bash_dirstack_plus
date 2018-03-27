@@ -162,8 +162,8 @@ function __load_dir_stack_history()
 function __update_dir_stack_history()
 {
   local accum
-  if [ ! -d ${DIRSTACK_HISTFILE#/*} ] ; then
-     mkdir -p ${DIRSTACK_HISTFILE#/*}
+  if [ ! -d ${DIRSTACK_HISTFILE%/*} ] ; then
+     mkdir -p ${DIRSTACK_HISTFILE%/*}
   fi
   rm -f ${DIRSTACK_HISTFILE}
   for (( i=0; i<${#DIRSTACK[*]}; i++)) ; do
