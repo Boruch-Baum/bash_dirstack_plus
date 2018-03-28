@@ -165,13 +165,12 @@ function __update_dir_stack_history()
   if [ ! -d ${DIRSTACK_HISTFILE%/*} ] ; then
      mkdir -p ${DIRSTACK_HISTFILE%/*}
   fi
-  rm -f ${DIRSTACK_HISTFILE}
   for (( i=0; i<${#DIRSTACK[*]}; i++)) ; do
      [[ "${DIRSTACK[${i}]}" != "${DIRSTACK[${i}+1]}" ]] || \
      [[ $i == ${#DIRSTACK[*]}-1 ]]          && \
      [[ "${DIRSTACK[${i}]}" != "${HOME}" ]] && \
      [[ "${DIRSTACK[${i}]}" != "~" ]]       && \
-     accum="$accum\n${DIRSTACK[${i}]/#~/${HOME}}" > ${DIRSTACK_HISTFILE}
+     accum="$accum\n${DIRSTACK[${i}]/#~/${HOME}}"
   done
   echo -e "$accum" > ${DIRSTACK_HISTFILE}
 }
